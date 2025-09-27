@@ -7,6 +7,7 @@ import java.util.Objects;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Remark;
 
 /**
  * Adds a remark to a {@code Person} or edits it if required.
@@ -24,7 +25,7 @@ public class RemarkCommand extends Command {
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Remark: %2$s";
 
     private final Index index;
-    private final String remark;
+    private final Remark remark;
 
     /**
      * Constructs a {@code RemarkCommand}.
@@ -32,7 +33,7 @@ public class RemarkCommand extends Command {
      * @param index Index of the person in the filtered person list to edit the remark of.
      * @param remark The remark to update to.
      */
-    public RemarkCommand(Index index, String remark) {
+    public RemarkCommand(Index index, Remark remark) {
         requireAllNonNull(index, remark);
 
         this.index = index;

@@ -17,6 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Remark;
 
 public class RemarkCommandTest {
 
@@ -24,7 +25,7 @@ public class RemarkCommandTest {
 
     @Test
     public void execute() throws ParseException {
-        final String remark = "Hello world";
+        final Remark remark = new Remark("Hello world");
 
         assertCommandFailure(new RemarkCommand(INDEX_FIRST_PERSON, remark), model,
                 String.format(MESSAGE_ARGUMENTS, INDEX_FIRST_PERSON.getOneBased(), remark));
@@ -32,10 +33,12 @@ public class RemarkCommandTest {
 
     @Test
     public void equals() {
-        final RemarkCommand standardCommand = new RemarkCommand(INDEX_FIRST_PERSON, VALID_REMARK_AMY);
+        final Remark nonEmptyRemark = new Remark(VALID_REMARK_AMY);
+
+        final RemarkCommand standardCommand = new RemarkCommand(INDEX_FIRST_PERSON, nonEmptyRemark);
 
         // same values -> returns true
-        RemarkCommand commandWithSameValues = new RemarkCommand(INDEX_FIRST_PERSON, VALID_REMARK_AMY);
+        RemarkCommand commandWithSameValues = new RemarkCommand(INDEX_FIRST_PERSON, nonEmptyRemark);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -48,9 +51,10 @@ public class RemarkCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> return false
-        assertFalse(standardCommand.equals(new RemarkCommand(INDEX_SECOND_PERSON, VALID_REMARK_AMY)));
+        assertFalse(standardCommand.equals(new RemarkCommand(INDEX_SECOND_PERSON, nonEmptyRemark)));
 
         // different remark -> return false
-        assertFalse(standardCommand.equals(new RemarkCommand(INDEX_FIRST_PERSON, VALID_REMARK_BOB)));
+        final Remark differentRemark = new Remark(VALID_REMARK_BOB);
+        assertFalse(standardCommand.equals(new RemarkCommand(INDEX_FIRST_PERSON, differentRemark)));
     }
 }
