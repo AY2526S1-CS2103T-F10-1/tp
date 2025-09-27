@@ -10,6 +10,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Used [JetBrain's Full Line Code Completion plugin](https://plugins.jetbrains.com/plugin/14823-full-line-code-completion)
 
 --------------------------------------------------------------------------------------------------------------------
 
