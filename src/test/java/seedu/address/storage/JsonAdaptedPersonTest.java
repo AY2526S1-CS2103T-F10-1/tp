@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -133,9 +134,21 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
+    public void createPersonIdentity_nullName_throwsIllegalValueException() {
+        assertThrows(IllegalValueException.class, () -> new JsonAdaptedPerson.PersonIdentity(
+                null, VALID_IDENTITY_PHONE));
+    }
+
+    @Test
     public void createPersonIdentity_invalidName_throwsIllegalValueException() {
         assertThrows(IllegalValueException.class, () -> new JsonAdaptedPerson.PersonIdentity(
                 INVALID_IDENTITY_NAME, VALID_IDENTITY_PHONE));
+    }
+
+    @Test
+    public void createPersonIdentity_nullPhone_throwsIllegalValueException() {
+        assertThrows(IllegalValueException.class, () -> new JsonAdaptedPerson.PersonIdentity(
+                VALID_IDENTITY_NAME, null));
     }
 
     @Test
@@ -150,6 +163,8 @@ public class JsonAdaptedPersonTest {
                 VALID_IDENTITY_NAME, VALID_IDENTITY_PHONE);
         JsonAdaptedPerson.PersonIdentity identity2 = new JsonAdaptedPerson.PersonIdentity(
                 VALID_IDENTITY_NAME, VALID_IDENTITY_PHONE);
+        assertEquals(identity1, identity1);
+        assertNotEquals("string", identity1);
         assertEquals(identity1, identity2);
     }
 

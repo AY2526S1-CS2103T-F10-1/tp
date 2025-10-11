@@ -60,6 +60,7 @@ public class PersonTest {
         assertDoesNotThrow(() -> alice.addPerson(bob));
         assertDoesNotThrow(() -> bob.removePerson(alice));
         assertThrows(IllegalValueException.class, () -> CARL.removePerson(alice));
+        assertThrows(IllegalValueException.class, () -> CARL.removePerson(CARL));
     }
 
     @Test

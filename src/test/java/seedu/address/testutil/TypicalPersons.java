@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 
@@ -71,6 +72,17 @@ public class TypicalPersons {
     }
 
     /**
+     * Returns an {@code AddressBook} with all the typical persons.
+     */
+    public static AddressBook getSelfPairingAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getSelfPairingTypicalPersons()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
+    /**
      * Returns an {@code AddressBook} with all the typical persons, but returning a new copy each function call.
      */
     public static AddressBook getFreshTypicalAddressBook() {
@@ -84,6 +96,16 @@ public class TypicalPersons {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
+    public static List<Person> getSelfPairingTypicalPersons() {
+        Person alice = (new PersonBuilder(ALICE)).build();
+        Person benson = (new PersonBuilder(BENSON)).build();
+        try {
+            alice.addPerson(benson);
+        } catch (IllegalValueException e) {
+            throw new RuntimeException(e);
+        }
+        return new ArrayList<>(Arrays.asList(alice, benson, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
 
     /**
      * Returns a List of typical persons, but returning a new copy each function call.

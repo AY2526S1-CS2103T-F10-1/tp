@@ -78,7 +78,9 @@ class JsonSerializableAddressBook {
             Person owner = pending.owner;
             for (JsonAdaptedPerson.PersonIdentity targetIdentity : pending.pairingIdentities) {
                 Person target = identityMap.get(targetIdentity.toLookupKey());
-                if (target == null || target == owner) {
+
+                // The case of (target == owner) is already addressed by Person.addPerson() and the catch clause below
+                if (target == null) {
                     continue;
                 }
 
@@ -90,8 +92,7 @@ class JsonSerializableAddressBook {
                 try {
                     owner.addPerson(target);
                 } catch (IllegalValueException ive) {
-                    throw new IllegalValueException(String.format("Invalid pairing between %s and %s: %s",
-                            owner.getName(), target.getName(), ive.getMessage()), ive);
+                    // duplicate pairings in savefile, silently ignore
                 }
             }
         }
