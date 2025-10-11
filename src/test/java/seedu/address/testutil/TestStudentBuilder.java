@@ -13,9 +13,9 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building {@code Student} objects.
+ * A utility class to help with building {@code Student} objects for testing.
  */
-public class StudentBuilder {
+public class TestStudentBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
@@ -29,9 +29,9 @@ public class StudentBuilder {
     private Set<Tag> tags;
 
     /**
-     * Creates a {@code StudentBuilder} with the default details.
+     * Creates a {@code TestStudentBuilder} with the default details.
      */
-    public StudentBuilder() {
+    public TestStudentBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
@@ -40,11 +40,11 @@ public class StudentBuilder {
     }
 
     /**
-     * Initializes the {@code StudentBuilder} with the data of {@code studentToCopy}.
+     * Initializes the {@code TestStudentBuilder} with the data of {@code studentToCopy}.
      *
      * @param studentToCopy The {@code Student} whose details are to be copied into this builder.
      */
-    public StudentBuilder(Student studentToCopy) {
+    public TestStudentBuilder(Student studentToCopy) {
         name = studentToCopy.getName();
         phone = studentToCopy.getPhone();
         email = studentToCopy.getEmail();
@@ -56,9 +56,9 @@ public class StudentBuilder {
      * Sets the {@code Name} of the {@code Student} that we are building.
      *
      * @param name The name to set.
-     * @return This {@code StudentBuilder} instance, to allow method chaining.
+     * @return This {@code TestStudentBuilder} instance, to allow method chaining.
      */
-    public StudentBuilder withName(String name) {
+    public TestStudentBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
@@ -67,9 +67,9 @@ public class StudentBuilder {
      * Sets the {@code Phone} of the {@code Student} that we are building.
      *
      * @param phone The phone number to set.
-     * @return This {@code StudentBuilder} instance, to allow method chaining.
+     * @return This {@code TestStudentBuilder} instance, to allow method chaining.
      */
-    public StudentBuilder withPhone(String phone) {
+    public TestStudentBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
         return this;
     }
@@ -78,9 +78,9 @@ public class StudentBuilder {
      * Sets the {@code Email} of the {@code Student} that we are building.
      *
      * @param email The email address to set.
-     * @return This {@code StudentBuilder} instance, to allow method chaining.
+     * @return This {@code TestStudentBuilder} instance, to allow method chaining.
      */
-    public StudentBuilder withEmail(String email) {
+    public TestStudentBuilder withEmail(String email) {
         this.email = new Email(email);
         return this;
     }
@@ -91,7 +91,7 @@ public class StudentBuilder {
      * @param address The address to set.
      * @return This {@code StudentBuilder} instance, to allow method chaining.
      */
-    public StudentBuilder withAddress(String address) {
+    public TestStudentBuilder withAddress(String address) {
         this.address = new Address(address);
         return this;
     }
@@ -100,9 +100,9 @@ public class StudentBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and sets it to the {@code Student} that we are building.
      *
      * @param tags The tags to assign to the student.
-     * @return This {@code StudentBuilder} instance, to allow method chaining.
+     * @return This {@code TestStudentBuilder} instance, to allow method chaining.
      */
-    public StudentBuilder withTags(String... tags) {
+    public TestStudentBuilder withTags(String... tags) {
         this.tags = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         return this;
     }

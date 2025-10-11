@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TestPersonBuilder;
 
 
 public class PersonTest {
@@ -30,14 +30,14 @@ public class PersonTest {
 
     @Test
     public void getPersonList_noPairings_returnsEmptyList() {
-        Person alice = new PersonBuilder(ALICE).build();
+        Person alice = new TestPersonBuilder(ALICE).build();
         assertTrue(alice.getPersonList().isEmpty());
     }
 
     @Test
     public void getPersonList_withPairings_returnsCorrectList() {
-        Person alice = new PersonBuilder(ALICE).build();
-        Person bob = new PersonBuilder(BOB).build();
+        Person alice = new TestPersonBuilder(ALICE).build();
+        Person bob = new TestPersonBuilder(BOB).build();
         assertDoesNotThrow(() -> alice.addPerson(bob));
         assertEquals(1, alice.getPersonList().size());
         assertTrue(alice.getPersonList().contains(bob));
@@ -45,8 +45,8 @@ public class PersonTest {
 
     @Test
     public void addPerson() {
-        Person alice = new PersonBuilder(ALICE).build();
-        Person bob = new PersonBuilder(BOB).build();
+        Person alice = new TestPersonBuilder(ALICE).build();
+        Person bob = new TestPersonBuilder(BOB).build();
         assertDoesNotThrow(() -> alice.addPerson(bob));
         assertThrows(IllegalValueException.class, () -> alice.addPerson(bob));
         assertThrows(IllegalValueException.class, () -> bob.addPerson(alice));
@@ -55,8 +55,8 @@ public class PersonTest {
 
     @Test
     public void removePerson() {
-        Person alice = new PersonBuilder(ALICE).build();
-        Person bob = new PersonBuilder(BOB).build();
+        Person alice = new TestPersonBuilder(ALICE).build();
+        Person bob = new TestPersonBuilder(BOB).build();
         assertDoesNotThrow(() -> alice.addPerson(bob));
         assertDoesNotThrow(() -> bob.removePerson(alice));
         assertThrows(IllegalValueException.class, () -> CARL.removePerson(alice));
@@ -71,28 +71,28 @@ public class PersonTest {
         assertFalse(ALICE.isSamePerson(null));
 
         // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        Person editedAlice = new TestPersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
-        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        editedAlice = new TestPersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
-        Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
+        Person editedBob = new TestPersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertFalse(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
+        editedBob = new TestPersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Person aliceCopy = new PersonBuilder(ALICE).build();
+        Person aliceCopy = new TestPersonBuilder(ALICE).build();
         assertTrue(ALICE.equals(aliceCopy));
 
         // same object -> returns true
@@ -108,23 +108,23 @@ public class PersonTest {
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false
-        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        Person editedAlice = new TestPersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different phone -> returns false
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        editedAlice = new TestPersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different email -> returns false
-        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        editedAlice = new TestPersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different address -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        editedAlice = new TestPersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new TestPersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 

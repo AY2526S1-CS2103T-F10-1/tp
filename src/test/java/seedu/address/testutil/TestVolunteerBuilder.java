@@ -12,9 +12,9 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Volunteer objects.
+ * A utility class to help with building Volunteer objects for testing.
  */
-public class VolunteerBuilder {
+public class TestVolunteerBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
@@ -28,9 +28,9 @@ public class VolunteerBuilder {
     private Set<Tag> tags;
 
     /**
-     * Constructs a {@code VolunteerBuilder} with default values.
+     * Constructs a {@code TestVolunteerBuilder} with default values.
      */
-    public VolunteerBuilder() {
+    public TestVolunteerBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
@@ -39,12 +39,12 @@ public class VolunteerBuilder {
     }
 
     /**
-     * Initializes the VolunteerBuilder with the data of {@code personToCopy}.
+     * Initializes the TestVolunteerBuilder with the data of {@code personToCopy}.
      * This constructor is useful when creating a Volunteer with pre-existing person data.
      *
      * @param personToCopy The person whose data will be used to initialize the builder.
      */
-    public VolunteerBuilder(seedu.address.model.person.Person personToCopy) {
+    public TestVolunteerBuilder(seedu.address.model.person.Person personToCopy) {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
@@ -56,9 +56,9 @@ public class VolunteerBuilder {
      * Sets the {@code name} of the {@code Volunteer} that we are building.
      *
      * @param name The name to be set for the Volunteer.
-     * @return The updated VolunteerBuilder object.
+     * @return The updated TestVolunteerBuilder object.
      */
-    public VolunteerBuilder withName(String name) {
+    public TestVolunteerBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
@@ -67,9 +67,9 @@ public class VolunteerBuilder {
      * Sets the {@code phone} of the {@code Volunteer} that we are building.
      *
      * @param phone The phone number to be set for the Volunteer.
-     * @return The updated VolunteerBuilder object.
+     * @return The updated TestVolunteerBuilder object.
      */
-    public VolunteerBuilder withPhone(String phone) {
+    public TestVolunteerBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
         return this;
     }
@@ -78,9 +78,9 @@ public class VolunteerBuilder {
      * Sets the {@code email} of the {@code Volunteer} that we are building.
      *
      * @param email The email to be set for the Volunteer.
-     * @return The updated VolunteerBuilder object.
+     * @return The updated TestVolunteerBuilder object.
      */
-    public VolunteerBuilder withEmail(String email) {
+    public TestVolunteerBuilder withEmail(String email) {
         this.email = new Email(email);
         return this;
     }
@@ -89,9 +89,9 @@ public class VolunteerBuilder {
      * Sets the {@code address} of the {@code Volunteer} that we are building.
      *
      * @param address The address to be set for the Volunteer.
-     * @return The updated VolunteerBuilder object.
+     * @return The updated TestVolunteerBuilder object.
      */
-    public VolunteerBuilder withAddress(String address) {
+    public TestVolunteerBuilder withAddress(String address) {
         this.address = new Address(address);
         return this;
     }
@@ -101,9 +101,9 @@ public class VolunteerBuilder {
      * The tags are provided as a varargs array of strings, which are then converted into a set of tags.
      *
      * @param tags The tags to be set for the Volunteer.
-     * @return The updated VolunteerBuilder object.
+     * @return The updated TestVolunteerBuilder object.
      */
-    public VolunteerBuilder withTags(String... tags) {
+    public TestVolunteerBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
