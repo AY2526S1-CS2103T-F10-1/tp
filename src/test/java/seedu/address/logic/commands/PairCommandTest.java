@@ -21,7 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TestPersonBuilder;
 
 
 public class PairCommandTest {
@@ -40,8 +40,8 @@ public class PairCommandTest {
         Index tuteeIndex = INDEX_SECOND_PERSON;
         PairCommand pairCommand = new PairCommand(tutorIndex, Collections.singletonList(tuteeIndex));
 
-        Person tutor = (new PersonBuilder(model.getFilteredPersonList().get(tutorIndex.getZeroBased()))).build();
-        Person tutee = (new PersonBuilder(model.getFilteredPersonList().get(tuteeIndex.getZeroBased()))).build();
+        Person tutor = (new TestPersonBuilder(model.getFilteredPersonList().get(tutorIndex.getZeroBased()))).build();
+        Person tutee = (new TestPersonBuilder(model.getFilteredPersonList().get(tuteeIndex.getZeroBased()))).build();
         String expectedMessage = String.format(PairCommand.MESSAGE_EDIT_PERSON_SUCCESS, tutor.getName().toString(),
                 "{" + tutee.getName().toString() + "}");
 

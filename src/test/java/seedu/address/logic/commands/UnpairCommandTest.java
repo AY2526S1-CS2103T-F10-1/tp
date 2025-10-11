@@ -21,7 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TestPersonBuilder;
 
 
 class UnpairCommandTest {
@@ -39,8 +39,8 @@ class UnpairCommandTest {
         Index tuteeIndex = INDEX_SECOND_PERSON;
 
         // Grab fresh copies (don’t mutate static fixtures directly)
-        Person tutor = (new PersonBuilder(model.getFilteredPersonList().get(tutorIndex.getZeroBased()))).build();
-        Person tutee = (new PersonBuilder(model.getFilteredPersonList().get(tuteeIndex.getZeroBased()))).build();
+        Person tutor = (new TestPersonBuilder(model.getFilteredPersonList().get(tutorIndex.getZeroBased()))).build();
+        Person tutee = (new TestPersonBuilder(model.getFilteredPersonList().get(tuteeIndex.getZeroBased()))).build();
 
         // Ensure model reflects the pairing before unpairing
         tutor.addPerson(tutee);
@@ -62,20 +62,20 @@ class UnpairCommandTest {
 
     @Test
     void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        Person alice = new PersonBuilder(ALICE).build(); // fresh copy
+        Person alice = new TestPersonBuilder(ALICE).build(); // fresh copy
         assertThrows(UnsupportedOperationException.class, () -> alice.getPersonList().clear());
     }
 
     @Test
     void getPersonList_noPairings_returnsEmptyList() {
-        Person alice = new PersonBuilder(ALICE).build(); // fresh copy
+        Person alice = new TestPersonBuilder(ALICE).build(); // fresh copy
         assertTrue(alice.getPersonList().isEmpty());
     }
 
     @Test
     void getPersonList_withPairings_returnsCorrectList() {
-        Person alice = new PersonBuilder(ALICE).build(); // fresh copy
-        Person bob = new PersonBuilder(BOB).build(); // fresh copy
+        Person alice = new TestPersonBuilder(ALICE).build(); // fresh copy
+        Person bob = new TestPersonBuilder(BOB).build(); // fresh copy
         assertDoesNotThrow(() -> alice.addPerson(bob));
         assertEquals(1, alice.getPersonList().size());
         assertTrue(alice.getPersonList().contains(bob));

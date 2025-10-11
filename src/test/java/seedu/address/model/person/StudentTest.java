@@ -12,19 +12,19 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.TestStudentBuilder;
 
 /**
  * Contains unit tests for {@link Student}.
  */
 public class StudentTest {
 
-    private static final Student ALICE = new StudentBuilder().withName("Alice Pauline").build();
-    private static final Student BOB = new StudentBuilder().withName("Bob Choo").build();
+    private static final Student ALICE = new TestStudentBuilder().withName("Alice Pauline").build();
+    private static final Student BOB = new TestStudentBuilder().withName("Bob Choo").build();
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Student student = new StudentBuilder().build();
+        Student student = new TestStudentBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> student.getTags().remove(0));
     }
 
@@ -33,44 +33,44 @@ public class StudentTest {
         assertTrue(ALICE.isSamePerson(ALICE));
         assertFalse(ALICE.isSamePerson(null));
 
-        Student editedAlice = new StudentBuilder(ALICE).withPhone(VALID_PHONE_BOB)
+        Student editedAlice = new TestStudentBuilder(ALICE).withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
-        editedAlice = new StudentBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        editedAlice = new TestStudentBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
-        Student editedBob = new StudentBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
+        Student editedBob = new TestStudentBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertFalse(BOB.isSamePerson(editedBob));
 
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new StudentBuilder(BOB).withName(nameWithTrailingSpaces).build();
+        editedBob = new TestStudentBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
     }
 
     @Test
     public void equals() {
-        Student aliceCopy = new StudentBuilder(ALICE).build();
+        Student aliceCopy = new TestStudentBuilder(ALICE).build();
         assertTrue(ALICE.equals(aliceCopy));
         assertTrue(ALICE.equals(ALICE));
         assertFalse(ALICE.equals(null));
         assertFalse(ALICE.equals(5));
         assertFalse(ALICE.equals(BOB));
 
-        Student editedAlice = new StudentBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        Student editedAlice = new TestStudentBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        editedAlice = new StudentBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        editedAlice = new TestStudentBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        editedAlice = new StudentBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        editedAlice = new TestStudentBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        editedAlice = new TestStudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new TestStudentBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
