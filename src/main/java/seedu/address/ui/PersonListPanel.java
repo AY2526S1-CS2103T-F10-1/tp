@@ -3,6 +3,8 @@ package seedu.address.ui;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
@@ -70,6 +72,24 @@ public class PersonListPanel extends UiPart<Region> {
             ));
             studentListView.refresh();
             volunteerListView.refresh();
+        });
+
+        autoScrollOnChange(studentListView, students);
+        autoScrollOnChange(volunteerListView, volunteers);
+    }
+
+    private static void autoScrollOnChange(ListView<Person> view, ObservableList<Person> list) {
+        list.addListener((ListChangeListener<Person>) change -> {
+            boolean needsScroll = false;
+            while (change.next()) {
+                if (change.wasAdded() || change.wasReplaced()) {
+                    needsScroll = true;
+                }
+            }
+            if (needsScroll && !list.isEmpty()) {
+                int last = list.size() - 1;
+                Platform.runLater(() -> view.scrollTo(last));
+            }
         });
     }
 

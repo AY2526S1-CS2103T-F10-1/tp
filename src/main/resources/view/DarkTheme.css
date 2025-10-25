@@ -328,6 +328,33 @@
     -fx-text-fill: white;
 }
 
+#commandTextArea {
+    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-insets: 0;
+    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-insets: 0;
+    -fx-border-width: 1;
+
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 13pt;
+    -fx-text-fill: white;
+
+}
+
+#commandTextArea .content {
+    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-radius: 0;
+}
+
+/* Prompt text tint similar to the rest of the dark UI */
+#commandTextArea .text {
+    -fx-fill: white;
+}
+
+#commandTextArea .prompt-text {
+    -fx-fill: rgba(255,255,255,0.5);
+}
+
 #filterField, #personListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
