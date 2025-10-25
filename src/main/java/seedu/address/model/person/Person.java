@@ -382,24 +382,10 @@ public class Person {
     }
 
     /**
-     * Trims and converts the given name to lowercase for consistent comparison.
-     */
-    private String normalizeName(String name) {
-        return name.trim().toLowerCase();
-    }
-
-    /**
      * Trims and converts the given email to lowercase for consistent comparison.
      */
     private String normalizeEmail(String email) {
         return email.trim().toLowerCase();
-    }
-
-    /**
-     * Trims the given phone number for consistent comparison.
-     */
-    private String normalizePhone(String phone) {
-        return phone.trim();
     }
 
     /**
@@ -482,15 +468,15 @@ public class Person {
         }
 
         // normalize names (case-insensitive, trimmed)
-        String thisName = normalizeName(getName().fullName);
-        String otherName = normalizeName(otherPerson.getName().fullName);
+        String thisName = Name.normalizeForIdentity(this.getName().fullName);
+        String otherName = Name.normalizeForIdentity(otherPerson.getName().fullName);
         if (!thisName.equals(otherName)) {
             return false;
         }
 
         // normalize contact values
-        String thisPhone = normalizePhone(getPhone().value);
-        String otherPhone = normalizePhone(otherPerson.getPhone().value);
+        String thisPhone = Phone.normalizeForIdentity(getPhone().value);
+        String otherPhone = Phone.normalizeForIdentity(otherPerson.getPhone().value);
         String thisEmail = normalizeEmail(getEmail().value);
         String otherEmail = normalizeEmail(otherPerson.getEmail().value);
 

@@ -24,12 +24,12 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD_VOLUNTEER = "addvol";
 
     public static final String MESSAGE_USAGE_STUDENT = COMMAND_WORD_STUDENT
-            + ": Adds a student to the address book. "
+            + ": Adds a student to the address book (Name must be provided). "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD_STUDENT + " "
             + "n/Alex Yeoh "
@@ -39,12 +39,12 @@ public class AddCommand extends Command {
             + "t/math";
 
     public static final String MESSAGE_USAGE_VOLUNTEER = COMMAND_WORD_VOLUNTEER
-            + ": Adds a volunteer to the address book. "
+            + ": Adds a volunteer to the address book (Name must be provided). "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD_VOLUNTEER + " "
             + "n/Bernice Yu "
