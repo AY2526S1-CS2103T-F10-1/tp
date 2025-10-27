@@ -155,6 +155,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void handleHelp(String message) {
         if (!helpWindow.isShowing()) {
+            helpWindow.setHelpMessage(message);
             helpWindow.show();
         } else {
             helpWindow.focus();
