@@ -41,7 +41,7 @@ public class UniquePersonListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new Person.PersonBuilder(ALICE)
+        Person editedAlice = new Student.StudentBuilder(ALICE)
                 .address(VALID_ADDRESS_BOB)
                 .tags(VALID_TAG_HUSBAND)
                 .build();
@@ -86,7 +86,7 @@ public class UniquePersonListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new Person.PersonBuilder(ALICE)
+        Person editedAlice = new Student.StudentBuilder(ALICE)
                 .address(VALID_ADDRESS_BOB)
                 .tags(VALID_TAG_HUSBAND)
                 .build();

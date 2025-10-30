@@ -14,8 +14,12 @@ public class Volunteer extends RoleBasedPerson {
             super();
         }
 
-        private VolunteerBuilder(Volunteer volunteer) {
-            super(volunteer);
+        public VolunteerBuilder(Person person) {
+            super(person);
+        }
+
+        public VolunteerBuilder(PersonBuilder<?, ?> personBuilder) {
+            super(personBuilder);
         }
 
         /**
@@ -44,7 +48,7 @@ public class Volunteer extends RoleBasedPerson {
     /**
      * Converts the PersonBuilder object to a VolunteerBuilder object.
      */
-    public static VolunteerBuilder toBuilder(PersonBuilder<?,?> personBuilder) {
+    public static VolunteerBuilder toBuilder(PersonBuilder<?, ?> personBuilder) {
         return copyFields(personBuilder.build(), new VolunteerBuilder());
     }
 

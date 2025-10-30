@@ -41,34 +41,34 @@ public class NameContainsKeywordsPredicateTest {
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
-        assertTrue(predicate.test(new Person.PersonBuilder().name("Alice Bob").build()));
+        assertTrue(predicate.test(new Student.StudentBuilder().name("Alice Bob").build()));
 
         // Multiple keywords
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
-        assertTrue(predicate.test(new Person.PersonBuilder().name("Alice Bob").build()));
+        assertTrue(predicate.test(new Student.StudentBuilder().name("Alice Bob").build()));
 
         // Only one matching keyword
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
-        assertTrue(predicate.test(new Person.PersonBuilder().name("Alice Carol").build()));
+        assertTrue(predicate.test(new Student.StudentBuilder().name("Alice Carol").build()));
 
         // Mixed-case keywords
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
-        assertTrue(predicate.test(new Person.PersonBuilder().name("Alice Bob").build()));
+        assertTrue(predicate.test(new Student.StudentBuilder().name("Alice Bob").build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new Person.PersonBuilder().name("Alice").build()));
+        assertFalse(predicate.test(new Student.StudentBuilder().name("Alice").build()));
 
         // Non-matching keyword
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Carol"));
-        assertFalse(predicate.test(new Person.PersonBuilder().name("Alice Bob").build()));
+        assertFalse(predicate.test(new Student.StudentBuilder().name("Alice Bob").build()));
 
         // Keywords match phone, email and address, but does not match name
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new Person.PersonBuilder()
+        assertFalse(predicate.test(new Student.StudentBuilder()
                 .name("Alice")
                 .phone("12345")
                 .email("alice@email.com")

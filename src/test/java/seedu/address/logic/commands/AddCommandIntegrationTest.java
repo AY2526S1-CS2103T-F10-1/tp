@@ -29,7 +29,7 @@ public class AddCommandIntegrationTest {
     @Test
     public void execute_newPerson_success() {
         // Build a Student (or Volunteer) for the new “typed-only” add flow
-        Person validEntry = asStudent(new Person.PersonBuilder().name("new").build());
+        Person validEntry = asStudent(new Student.StudentBuilder().name("new").build());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validEntry);

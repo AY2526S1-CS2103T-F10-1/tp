@@ -14,8 +14,12 @@ public class Student extends RoleBasedPerson {
             super();
         }
 
-        private StudentBuilder(Student student) {
-            super(student);
+        public StudentBuilder(Person person) {
+            super(person);
+        }
+
+        public StudentBuilder(PersonBuilder<?, ?> personBuilder) {
+            super(personBuilder);
         }
 
         /**
@@ -44,7 +48,7 @@ public class Student extends RoleBasedPerson {
     /**
      * Converts the PersonBuilder object to a StudentBuilder object.
      */
-    public static StudentBuilder toBuilder(PersonBuilder<?,?> personBuilder) {
+    public static StudentBuilder toBuilder(PersonBuilder<?, ?> personBuilder) {
         return copyFields(personBuilder.build(), new StudentBuilder());
     }
 

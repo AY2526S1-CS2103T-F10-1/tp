@@ -23,42 +23,42 @@ public class PersonTest {
         assertTrue(ALICE.isSamePerson(ALICE));
 
         // same name and same phone -> returns true
-        Person editedAlice = new Person.PersonBuilder(ALICE)
+        Person editedAlice = new Student.StudentBuilder(ALICE)
                 .email(VALID_EMAIL_BOB) // different email, same name + phone
                 .build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // same name and same email -> returns true
-        editedAlice = new Person.PersonBuilder(ALICE)
+        editedAlice = new Student.StudentBuilder(ALICE)
                 .phone(VALID_PHONE_BOB) // different phone, same name + email
                 .build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // same name, different phone AND different email -> returns false
-        editedAlice = new Person.PersonBuilder(ALICE)
+        editedAlice = new Student.StudentBuilder(ALICE)
                 .phone(VALID_PHONE_BOB)
                 .email(VALID_EMAIL_BOB)
                 .build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
-        editedAlice = new Person.PersonBuilder(ALICE).name(VALID_NAME_BOB).build();
+        editedAlice = new Student.StudentBuilder(ALICE).name(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
         // same name but different case -> returns true (case-insensitive)
-        Person editedBob = new Person.PersonBuilder(BOB).name(VALID_NAME_BOB.toLowerCase()).build();
+        Person editedBob = new Student.StudentBuilder(BOB).name(VALID_NAME_BOB.toLowerCase()).build();
         assertTrue(BOB.isSamePerson(editedBob));
 
         // same name but with trailing spaces -> returns true (trimmed)
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new Person.PersonBuilder(BOB).name(nameWithTrailingSpaces).build();
+        editedBob = new Student.StudentBuilder(BOB).name(nameWithTrailingSpaces).build();
         assertTrue(BOB.isSamePerson(editedBob));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Person aliceCopy = new Person.PersonBuilder(ALICE).build();
+        Person aliceCopy = new Student.StudentBuilder(ALICE).build();
 
         // same object -> returns true
         assertTrue(ALICE.equals(ALICE));
@@ -73,23 +73,23 @@ public class PersonTest {
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false
-        Person editedAlice = new Person.PersonBuilder(ALICE).name(VALID_NAME_BOB).build();
+        Person editedAlice = new Student.StudentBuilder(ALICE).name(VALID_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different phone -> returns false
-        editedAlice = new Person.PersonBuilder(ALICE).phone(VALID_PHONE_BOB).build();
+        editedAlice = new Student.StudentBuilder(ALICE).phone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different email -> returns false
-        editedAlice = new Person.PersonBuilder(ALICE).email(VALID_EMAIL_BOB).build();
+        editedAlice = new Student.StudentBuilder(ALICE).email(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different address -> returns false
-        editedAlice = new Person.PersonBuilder(ALICE).address(VALID_ADDRESS_BOB).build();
+        editedAlice = new Student.StudentBuilder(ALICE).address(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new Person.PersonBuilder(ALICE).tags(VALID_TAG_HUSBAND).build();
+        editedAlice = new Student.StudentBuilder(ALICE).tags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 

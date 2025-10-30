@@ -36,7 +36,7 @@ public abstract class Person {
     /**
      * The Builder for the Person class.
      */
-    public static abstract class PersonBuilder<T extends PersonBuilder<T, R>, R extends Person> {
+    public abstract static class PersonBuilder<T extends PersonBuilder<T, R>, R extends Person> {
         // Required parameters
         private Name name;
 
@@ -49,16 +49,14 @@ public abstract class Person {
         /**
          * Constructor for PersonBuilder.
          */
-        protected PersonBuilder() {
+        public PersonBuilder() {
 
         }
-
-        protected abstract T self();
 
         /**
          * Constructor for PersonBuilder with Person.
          */
-        public PersonBuilder(R p) {
+        public PersonBuilder(Person p) {
             this.name = p.getName();
             this.phone = p.getPhone();
             this.email = p.getEmail();
@@ -69,13 +67,15 @@ public abstract class Person {
         /**
          * Copy constructor.
          */
-        public PersonBuilder(PersonBuilder<?,?> toCopy) {
+        public PersonBuilder(PersonBuilder<?, ?> toCopy) {
             this.name = toCopy.name;
             this.phone = toCopy.phone;
             this.email = toCopy.email;
             this.address = toCopy.address;
             this.tags = toCopy.tags;
         }
+
+        protected abstract T self();
 
         /**
          * Setter for the name parameter.
@@ -262,7 +262,7 @@ public abstract class Person {
                 return false;
             }
 
-            PersonBuilder<?,?> otherPersonBuilder = (PersonBuilder<?,?>) other;
+            PersonBuilder<?, ?> otherPersonBuilder = (PersonBuilder<?, ?>) other;
             return Objects.equals(name, otherPersonBuilder.name) && Objects.equals(phone, otherPersonBuilder.phone)
                     && Objects.equals(email, otherPersonBuilder.email)
                     && Objects.equals(address, otherPersonBuilder.address)

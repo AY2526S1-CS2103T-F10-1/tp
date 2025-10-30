@@ -14,6 +14,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditPersonDescriptorTest {
@@ -21,7 +22,7 @@ public class EditPersonDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Person.PersonBuilder descriptorWithSameValues = new Person.PersonBuilder(DESC_AMY);
+        Person.PersonBuilder descriptorWithSameValues = new Student.StudentBuilder(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -37,7 +38,7 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        Person.PersonBuilder editedAmy = new Person.PersonBuilder(DESC_AMY).name(VALID_NAME_BOB);
+        Person.PersonBuilder editedAmy = new Student.StudentBuilder(DESC_AMY).name(VALID_NAME_BOB);
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false
@@ -59,8 +60,8 @@ public class EditPersonDescriptorTest {
 
     @Test
     public void toStringMethod() {
-        Person.PersonBuilder editPersonDescriptor = new Person.PersonBuilder();
-        String expected = Person.PersonBuilder.class.getCanonicalName() + "{name="
+        Person.PersonBuilder editPersonDescriptor = new Student.StudentBuilder();
+        String expected = Student.StudentBuilder.class.getCanonicalName() + "{name="
                 + editPersonDescriptor.getName() + ", phone="
                 + editPersonDescriptor.getPhone() + ", email="
                 + editPersonDescriptor.getEmail() + ", address="

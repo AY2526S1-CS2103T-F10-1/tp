@@ -19,6 +19,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 /**
  * Contains helper methods for testing commands.
@@ -58,17 +59,17 @@ public class CommandTestUtil {
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
 
-    public static final Person.PersonBuilder DESC_AMY;
-    public static final Person.PersonBuilder DESC_BOB;
+    public static final Student.StudentBuilder DESC_AMY;
+    public static final Student.StudentBuilder DESC_BOB;
 
     static {
-        DESC_AMY = new Person.PersonBuilder()
+        DESC_AMY = new Student.StudentBuilder()
                 .name(VALID_NAME_AMY)
                 .phone(VALID_PHONE_AMY)
                 .email(VALID_EMAIL_AMY)
                 .address(VALID_ADDRESS_AMY)
                 .tags(VALID_TAG_FRIEND);
-        DESC_BOB = new Person.PersonBuilder()
+        DESC_BOB = new Student.StudentBuilder()
                 .name(VALID_NAME_BOB)
                 .phone(VALID_PHONE_BOB)
                 .email(VALID_EMAIL_BOB)
