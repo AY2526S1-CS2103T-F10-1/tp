@@ -4,18 +4,18 @@ package seedu.address.model.person;
  * Represents a Student in the tutoring volunteer system.
  * Same fields as Person; used to distinguish between Students and Volunteers.
  */
-public class Student extends Person {
+public class Student extends RoleBasedPerson {
 
     /**
      * The Builder for the Student class.
      */
-    public static class StudentBuilder extends Person.PersonBuilder {
-
-        /**
-         * Constructor for a StudentBuilder object.
-         */
+    public static class StudentBuilder extends PersonBuilder<StudentBuilder, Student> {
         public StudentBuilder() {
             super();
+        }
+
+        private StudentBuilder(Student student) {
+            super(student);
         }
 
         /**
@@ -25,6 +25,11 @@ public class Student extends Person {
         public Student build() {
             return new Student(this);
         }
+
+        @Override
+        public StudentBuilder self() {
+            return this;
+        }
     }
 
     private Student(StudentBuilder builder) {
@@ -33,41 +38,26 @@ public class Student extends Person {
 
     @Override
     public StudentBuilder toBuilder() {
-        return (StudentBuilder) new StudentBuilder()
-                .name(this.getName())
-                .phone(this.getPhone())
-                .email(this.getEmail())
-                .address(this.getAddress())
-                .tags(this.getTags());
+        return new StudentBuilder(this);
     }
 
     /**
      * Converts the PersonBuilder object to a StudentBuilder object.
      */
-    public static StudentBuilder toBuilder(PersonBuilder personBuilder) {
-        return (StudentBuilder) new StudentBuilder()
-                .name(personBuilder.getName())
-                .phone(personBuilder.getPhone())
-                .email(personBuilder.getEmail())
-                .address(personBuilder.getAddress())
-                .tags(personBuilder.getTags());
+    public static StudentBuilder toBuilder(PersonBuilder<?,?> personBuilder) {
+        return copyFields(personBuilder.build(), new StudentBuilder());
     }
 
     /**
      * Converts the Person object to a StudentBuilder object.
      */
     public static StudentBuilder toBuilder(Person person) {
-        return (StudentBuilder) new StudentBuilder()
-                .name(person.getName())
-                .phone(person.getPhone())
-                .email(person.getEmail())
-                .address(person.getAddress())
-                .tags(person.getTags());
+        return copyFields(person, new StudentBuilder());
     }
 
     @Override
-    public String toString() {
-        return "[Student] " + super.toString();
+    public String getType() {
+        return "Student";
     }
 
     @Override
@@ -78,10 +68,5 @@ public class Student extends Person {
     @Override
     public int hashCode() {
         return super.hashCode();
-    }
-
-    @Override
-    public String getType() {
-        return "Student";
     }
 }

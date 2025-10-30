@@ -146,15 +146,6 @@ class JsonAdaptedPerson {
                     .address(modelAddress)
                     .tags(modelTags)
                     .build();
-        // optionally allow "person"
-        case "person":
-            return new Person.PersonBuilder()
-                    .name(modelName)
-                    .phone(modelPhone)
-                    .email(modelEmail)
-                    .address(modelAddress)
-                    .tags(modelTags)
-                    .build();
         default:
             throw new IllegalValueException(String.format(UNSUPPORTED_TYPE_MESSAGE, type));
         }

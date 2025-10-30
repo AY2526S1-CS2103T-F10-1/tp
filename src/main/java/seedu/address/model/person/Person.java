@@ -16,7 +16,7 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public abstract class Person {
     public static final String SELF_PAIRING = "Person cannot be paired with themselves.";
     public static final String REPEAT_PAIRING = "{} and {} already paired.";
 
@@ -33,12 +33,10 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags;
 
-    private final PersonBuilder personBuilder;
-
     /**
      * The Builder for the Person class.
      */
-    public static class PersonBuilder extends Builder<PersonBuilder> {
+    public static abstract class PersonBuilder<T extends PersonBuilder<T, R>, R extends Person> {
         // Required parameters
         private Name name;
 
@@ -51,14 +49,16 @@ public class Person {
         /**
          * Constructor for PersonBuilder.
          */
-        public PersonBuilder() {
+        protected PersonBuilder() {
 
         }
+
+        protected abstract T self();
 
         /**
          * Constructor for PersonBuilder with Person.
          */
-        public PersonBuilder(Person p) {
+        public PersonBuilder(R p) {
             this.name = p.getName();
             this.phone = p.getPhone();
             this.email = p.getEmail();
@@ -69,7 +69,7 @@ public class Person {
         /**
          * Copy constructor.
          */
-        public PersonBuilder(PersonBuilder toCopy) {
+        public PersonBuilder(PersonBuilder<?,?> toCopy) {
             this.name = toCopy.name;
             this.phone = toCopy.phone;
             this.email = toCopy.email;
@@ -80,152 +80,149 @@ public class Person {
         /**
          * Setter for the name parameter.
          */
-        public PersonBuilder name(Name name) {
+        public T name(Name name) {
             if (name != null) {
                 this.name = name;
             }
-            return this;
+            return self();
         }
 
         /**
          * Setter for the name parameter but with String argument.
          */
-        public PersonBuilder name(String name) {
+        public T name(String name) {
             return this.name(new Name(name));
         }
 
         /**
          * Setter for the name parameter but only if this.name does not already exist.
          */
-        public PersonBuilder nameIfNotPresent(Name name) {
+        public T nameIfNotPresent(Name name) {
             if (this.name == null && name != null) {
                 this.name = name;
             }
-            return this;
+            return self();
         }
 
         /**
          * Setter for the phone parameter.
          */
-        public PersonBuilder phone(Phone phone) {
+        public T phone(Phone phone) {
             if (phone != null) {
                 this.phone = phone;
             }
-            return this;
+            return self();
         }
 
         /**
          * Setter for the phone parameter but with String argument.
          */
-        public PersonBuilder phone(String phone) {
+        public T phone(String phone) {
             return this.phone(new Phone(phone));
         }
 
         /**
          * Setter for the phone parameter but only if this.phone does not already exist.
          */
-        public PersonBuilder phoneIfNotPresent(Phone phone) {
+        public T phoneIfNotPresent(Phone phone) {
             if (this.phone == null && phone != null) {
                 this.phone = phone;
             }
-            return this;
+            return self();
         }
 
         /**
          * Setter for the email parameter.
          */
-        public PersonBuilder email(Email email) {
+        public T email(Email email) {
             if (email != null) {
                 this.email = email;
             }
-            return this;
+            return self();
         }
 
         /**
          * Setter for the email parameter but with String argument.
          */
-        public PersonBuilder email(String email) {
+        public T email(String email) {
             return this.email(new Email(email));
         }
 
         /**
          * Setter for the email parameter but only if this.email does not already exist.
          */
-        public PersonBuilder emailIfNotPresent(Email email) {
+        public T emailIfNotPresent(Email email) {
             if (this.email == null && email != null) {
                 this.email = email;
             }
-            return this;
+            return self();
         }
 
         /**
          * Setter for the address parameter.
          */
-        public PersonBuilder address(Address address) {
+        public T address(Address address) {
             if (address != null) {
                 this.address = address;
             }
-            return this;
+            return self();
         }
 
         /**
          * Setter for the address parameter but with String argument.
          */
-        public PersonBuilder address(String address) {
+        public T address(String address) {
             return this.address(new Address(address));
         }
 
         /**
          * Setter for the address parameter but only if this.address does not already exist.
          */
-        public PersonBuilder addressIfNotPresent(Address address) {
+        public T addressIfNotPresent(Address address) {
             if (this.address == null && address != null) {
                 this.address = address;
             }
-            return this;
+            return self();
         }
 
         /**
          * Setter for the tags parameter.
          */
-        public PersonBuilder tags(Set<Tag> tags) {
+        public T tags(Set<Tag> tags) {
             if (tags != null) {
                 this.tags = new HashSet<>();
                 this.tags.addAll(tags);
             }
-            return this;
+            return self();
         }
 
         /**
          * Setter for the tags parameter but with tags in String format.
          */
-        public PersonBuilder tags(String... tags) {
+        public T tags(String... tags) {
             if (tags != null) {
                 this.tags = new HashSet<>();
                 for (int i = 0; i < tags.length; i++) {
                     this.tags.add(new Tag(tags[i]));
                 }
             }
-            return this;
+            return self();
         }
 
         /**
          * Setter for the tags parameter but only if this.tags does not already exist.
          */
-        public PersonBuilder tagsIfNotPresent(Set<Tag> tags) {
+        public T tagsIfNotPresent(Set<Tag> tags) {
             if (this.tags == null && tags != null) {
                 this.tags = tags;
             }
-            return this;
+            return self();
         }
 
         /**
          * Returns a Person object with the parameter values of the Builder.
          */
-        public Person build() {
-            requireNonNull(name);
-            return new Person(this);
-        }
+        public abstract R build();
 
         /**
          * Returns true if at least one field is edited.
@@ -265,7 +262,7 @@ public class Person {
                 return false;
             }
 
-            PersonBuilder otherPersonBuilder = (PersonBuilder) other;
+            PersonBuilder<?,?> otherPersonBuilder = (PersonBuilder<?,?>) other;
             return Objects.equals(name, otherPersonBuilder.name) && Objects.equals(phone, otherPersonBuilder.phone)
                     && Objects.equals(email, otherPersonBuilder.email)
                     && Objects.equals(address, otherPersonBuilder.address)
@@ -284,22 +281,19 @@ public class Person {
      * Constructor for a Person object using the builder. This is the intended method of constructing
      * the person object via the Builder pattern.
      */
-    public Person(PersonBuilder builder) {
+    public Person(PersonBuilder<?, ?> builder) {
         requireAllNonNull(builder.name);
         this.name = builder.name;
         this.phone = builder.phone != null ? builder.phone : DEFAULT_PHONE;
         this.email = builder.email != null ? builder.email : DEFAULT_EMAIL;
         this.address = builder.address != null ? builder.address : DEFAULT_ADDRESS;
         this.tags = builder.tags != null ? builder.tags : new HashSet<>();
-        this.personBuilder = builder;
     }
 
     /**
      * Converts the Person back to Builder form so that it can be easily modified.
      */
-    public PersonBuilder toBuilder() {
-        return new PersonBuilder(this.personBuilder);
-    }
+    public abstract PersonBuilder<?, ?> toBuilder();
 
     /**
      * Returns the name.
@@ -431,4 +425,11 @@ public class Person {
         return "Person";
     }
 
+    protected static <T extends PersonBuilder<T, ?>> T copyFields(Person source, T target) {
+        return target.name(source.getName())
+                .phone(source.getPhone())
+                .email(source.getEmail())
+                .address(source.getAddress())
+                .tags(source.getTags());
+    }
 }
