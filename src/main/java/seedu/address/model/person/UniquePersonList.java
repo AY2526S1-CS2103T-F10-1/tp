@@ -57,6 +57,7 @@ public class UniquePersonList implements Iterable<Person> {
 
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
+
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new PersonNotFoundException();
@@ -64,10 +65,18 @@ public class UniquePersonList implements Iterable<Person> {
         if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
             throw new DuplicatePersonException();
         }
-        internalList.set(index, editedPerson);
+
+        // migrate id FIRST, so listeners triggered by internalList.set(...) can resolve editedPerson
         Integer id = ids.remove(target);
+        if (id == null) {
+            throw new PersonNotFoundException();
+        }
         ids.put(editedPerson, id);
+
+        internalList.set(index, editedPerson);
     }
+
+
 
     /**
      * Removes the equivalent person from the list.

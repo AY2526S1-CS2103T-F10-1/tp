@@ -17,6 +17,29 @@ public class HelpCommand extends Command {
             "The help window is already open. If it cannot be found, "
                     + "check if it is minimised or at the edge of the screen.";
 
+    private final String commandWord;
+    public HelpCommand() {
+        this.commandWord = null;
+    }
+
+    /**
+     * Constructs a {@code HelpCommand} with an optional command word.
+     * The input is trimmed, converted to lowercase, and sanitized
+     * by removing all non-alphanumeric characters.
+     *
+     * @param commandWord the command word to filter help results for; may be {@code null} or blank
+     */
+    public HelpCommand(String commandWord) {
+        if (commandWord == null || commandWord.isBlank()) {
+            this.commandWord = null;
+        } else {
+            this.commandWord = commandWord.trim()
+                    .toLowerCase()
+                    .replaceAll("[^a-z0-9]", "");
+        }
+    }
+
+
     /**
      * Executes the Help command and returns a {@code CommandResult} containing
      * a formatted list of available sample commands and their usage examples.
@@ -25,9 +48,27 @@ public class HelpCommand extends Command {
     public CommandResult execute(Model model) {
         assert model != null : "Model should not be null when executing HelpCommand";
 
-        StringBuilder sb = new StringBuilder();
+        if (this.commandWord == null || this.commandWord.isBlank()) {
+            CommandResult result = new CommandResult("Opened help window with command summary.", true, false);
+            result.setHelpContent(getFullHelpHtml());
+            return result;
+        }
 
-        sb.append("""
+        String fullHtml = getFullHelpHtml();
+        String filtered = extractCommandSection(fullHtml, this.commandWord);
+
+        if (filtered == null) {
+            filtered = "<p>Unknown command: <b>" + this.commandWord + "</b></p>"
+                    + "<p>Type <code>help</code> to see all available commands.</p>";
+        }
+
+        CommandResult result = new CommandResult("Opened help for command: " + this.commandWord, true, false);
+        result.setHelpContent(filtered);
+        return result;
+    }
+
+    public String getFullHelpHtml() {
+        return """
         <h1>Command Summary</h1>
         <table>
           <tr><th>Action</th><th>Format, Example</th></tr>
@@ -80,10 +121,38 @@ public class HelpCommand extends Command {
         </table>
 
         <p>For full command details and examples, visit:<br>
-        <a href="https://ay2526s1-cs2103t-f10-1.github.io/tp/UserGuide.html" target="_blank">User Guide</a></p>""");
+        <a href="https://ay2526s1-cs2103t-f10-1.github.io/tp/UserGuide.html" target="_blank">User Guide</a></p>""";
+    }
 
-        CommandResult result = new CommandResult("Opened help window with command summary.", true, false);
-        result.setHelpContent(sb.toString());
-        return result;
+    private String extractCommandSection(String html, String commandWord) {
+        String lowerHtml = html.toLowerCase();
+        String lowerCommand = commandWord.toLowerCase();
+        StringBuilder matches = new StringBuilder();
+
+        int index = 0;
+        while (true) {
+            int codeIndex = lowerHtml.indexOf("<code>" + lowerCommand, index);
+            if (codeIndex == -1) {
+                break;
+            }
+
+            int trStart = lowerHtml.lastIndexOf("<tr>", codeIndex);
+            int trEnd = lowerHtml.indexOf("</tr>", codeIndex);
+            if (trStart != -1 && trEnd != -1) {
+                matches.append(html, trStart, trEnd + 5);
+            }
+
+            index = trEnd + 5;
+        }
+
+        if (matches.length() == 0) {
+            return null;
+        }
+
+        return "<h1>Help results for '" + commandWord + "*'</h1><table>"
+                + matches
+                + "</table>"
+                + "<p><a href='https://ay2526s1-cs2103t-f10-1.github.io/tp/UserGuide.html' "
+                + "target='_blank'>View full guide</a></p>";
     }
 }
