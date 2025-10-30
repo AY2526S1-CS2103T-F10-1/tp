@@ -71,7 +71,7 @@ class JsonAdaptedPerson {
         } else if (source instanceof Volunteer) {
             type = "volunteer";
         } else {
-            type = "person";
+            type = "student";
         }
     }
 
@@ -126,8 +126,10 @@ class JsonAdaptedPerson {
         final List<Person> modelPairings = new ArrayList<>();
 
         final String normalized = (type == null || type.isBlank())
-                ? "person"
+                ? "student"
                 : type.trim().toLowerCase();
+
+        System.out.println();
 
         switch (normalized) {
         case "student":

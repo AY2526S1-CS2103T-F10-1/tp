@@ -23,7 +23,7 @@ public class Volunteer extends RoleBasedPerson {
         }
 
         /**
-         * Returns a Student object with the parameter values of the Builder.
+         * Returns a Volunteer object with the parameter values of the Builder.
          */
         @Override
         public Volunteer build() {

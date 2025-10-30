@@ -421,9 +421,7 @@ public abstract class Person {
         return originalToString();
     }
 
-    public String getType() {
-        return "Person";
-    }
+    public abstract String getType();
 
     protected static <T extends PersonBuilder<T, ?>> T copyFields(Person source, T target) {
         return target.name(source.getName())
