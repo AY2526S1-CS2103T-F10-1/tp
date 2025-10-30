@@ -26,7 +26,7 @@ import seedu.address.model.person.Volunteer;
  */
 public class TypicalPersons {
 
-    public static final Supplier<Person> ALICE_SUPPLIER = (() ->
+    public static final Supplier<Student> ALICE_SUPPLIER = (() ->
             new Student.StudentBuilder()
                     .name("Alice Pauline")
                     .address("123, Jurong West Ave 6, #08-111")
@@ -35,7 +35,7 @@ public class TypicalPersons {
                     .tags("friends")
                     .build()
     );
-    public static final Supplier<Person> BENSON_SUPPLIER = (() ->
+    public static final Supplier<Student> BENSON_SUPPLIER = (() ->
             new Student.StudentBuilder()
                     .name("Benson Meier")
                     .address("311, Clementi Ave 2, #02-25")
@@ -44,7 +44,7 @@ public class TypicalPersons {
                     .tags("owesMoney", "friends")
                     .build()
     );
-    public static final Supplier<Person> CARL_SUPPLIER = (() ->
+    public static final Supplier<Student> CARL_SUPPLIER = (() ->
             new Student.StudentBuilder()
                     .name("Carl Kurz")
                     .phone("95352563")
@@ -52,7 +52,7 @@ public class TypicalPersons {
                     .address("wall street")
                     .build()
     );
-    public static final Supplier<Person> DANIEL_SUPPLIER = (() ->
+    public static final Supplier<Student> DANIEL_SUPPLIER = (() ->
             new Student.StudentBuilder()
                     .name("Daniel Meier")
                     .phone("87652533")
@@ -61,7 +61,7 @@ public class TypicalPersons {
                     .tags("friends")
                     .build()
     );
-    public static final Supplier<Person> ELLE_SUPPLIER = (() ->
+    public static final Supplier<Volunteer> ELLE_SUPPLIER = (() ->
             new Volunteer.VolunteerBuilder()
                     .name("Elle Meyer")
                     .phone("9482224")
@@ -69,7 +69,7 @@ public class TypicalPersons {
                     .address("michegan ave")
                     .build()
     );
-    public static final Supplier<Person> FIONA_SUPPLIER = (() ->
+    public static final Supplier<Volunteer> FIONA_SUPPLIER = (() ->
             new Volunteer.VolunteerBuilder()
                     .name("Fiona Kunz")
                     .phone("9482427")
@@ -77,7 +77,7 @@ public class TypicalPersons {
                     .address("little tokyo")
                     .build()
     );
-    public static final Supplier<Person> GEORGE_SUPPLIER = (() ->
+    public static final Supplier<Volunteer> GEORGE_SUPPLIER = (() ->
             new Volunteer.VolunteerBuilder()
                     .name("George Best")
                     .phone("9482442")
@@ -87,7 +87,7 @@ public class TypicalPersons {
     );
 
     // Manually added
-    public static final Supplier<Person> HOON_SUPPLIER = (() ->
+    public static final Supplier<Volunteer> HOON_SUPPLIER = (() ->
             new Volunteer.VolunteerBuilder()
                     .name("Hoon Meier")
                     .phone("8482424")
@@ -95,7 +95,7 @@ public class TypicalPersons {
                     .address("little india")
                     .build()
     );
-    public static final Supplier<Person> IDA_SUPPLIER = (() ->
+    public static final Supplier<Volunteer> IDA_SUPPLIER = (() ->
             new Volunteer.VolunteerBuilder()
                     .name("Ida Mueller")
                     .phone("8482131")
@@ -105,7 +105,7 @@ public class TypicalPersons {
     );
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Supplier<Person> AMY_SUPPLIER = (() ->
+    public static final Supplier<Volunteer> AMY_SUPPLIER = (() ->
             new Volunteer.VolunteerBuilder()
                     .name(VALID_NAME_AMY)
                     .phone(VALID_PHONE_AMY)
@@ -114,7 +114,7 @@ public class TypicalPersons {
                     .tags(VALID_TAG_FRIEND)
                     .build()
     );
-    public static final Supplier<Person> BOB_SUPPLIER = (() ->
+    public static final Supplier<Volunteer> BOB_SUPPLIER = (() ->
             new Volunteer.VolunteerBuilder()
                     .name(VALID_NAME_BOB)
                     .phone(VALID_PHONE_BOB)
@@ -124,17 +124,17 @@ public class TypicalPersons {
                     .build()
     );
 
-    public static final Person ALICE = ALICE_SUPPLIER.get();
-    public static final Person BENSON = BENSON_SUPPLIER.get();
-    public static final Person CARL = CARL_SUPPLIER.get();
-    public static final Person DANIEL = DANIEL_SUPPLIER.get();
-    public static final Person ELLE = ELLE_SUPPLIER.get();
-    public static final Person FIONA = FIONA_SUPPLIER.get();
-    public static final Person GEORGE = GEORGE_SUPPLIER.get();
-    public static final Person HOON = HOON_SUPPLIER.get();
-    public static final Person IDA = IDA_SUPPLIER.get();
-    public static final Person AMY = AMY_SUPPLIER.get();
-    public static final Person BOB = BOB_SUPPLIER.get();
+    public static final Student ALICE = ALICE_SUPPLIER.get();
+    public static final Student BENSON = BENSON_SUPPLIER.get();
+    public static final Student CARL = CARL_SUPPLIER.get();
+    public static final Student DANIEL = DANIEL_SUPPLIER.get();
+    public static final Volunteer ELLE = ELLE_SUPPLIER.get();
+    public static final Volunteer FIONA = FIONA_SUPPLIER.get();
+    public static final Volunteer GEORGE = GEORGE_SUPPLIER.get();
+    public static final Volunteer HOON = HOON_SUPPLIER.get();
+    public static final Volunteer IDA = IDA_SUPPLIER.get();
+    public static final Volunteer AMY = AMY_SUPPLIER.get();
+    public static final Volunteer BOB = BOB_SUPPLIER.get();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
@@ -153,7 +153,7 @@ public class TypicalPersons {
 
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE_SUPPLIER.get(), BENSON_SUPPLIER.get(), CARL_SUPPLIER.get(),
+        return new ArrayList<>(Arrays.asList((Person) ALICE_SUPPLIER.get(), BENSON_SUPPLIER.get(), CARL_SUPPLIER.get(),
                 DANIEL_SUPPLIER.get(), ELLE_SUPPLIER.get(), FIONA_SUPPLIER.get(), GEORGE_SUPPLIER.get()));
     }
 }

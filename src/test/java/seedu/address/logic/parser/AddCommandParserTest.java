@@ -52,7 +52,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         Student expectedStudent = asStudent(
-                new Person.PersonBuilder(BOB.toBuilder())
+                new Student.StudentBuilder(BOB.toBuilder())
                         .tags(VALID_TAG_FRIEND)
                         .build()
         );
@@ -65,7 +65,7 @@ public class AddCommandParserTest {
         // multiple tags - all accepted
         Student expectedStudentMultipleTags =
                 asStudent(
-                        new Person.PersonBuilder(BOB.toBuilder())
+                        new Student.StudentBuilder(BOB.toBuilder())
                                 .tags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                                 .build()
                 );
@@ -141,7 +141,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         Student expectedStudent = asStudent(
-                new Person.PersonBuilder(AMY.toBuilder())
+                new Student.StudentBuilder(AMY.toBuilder())
                 .build()
         );
         assertParseSuccess(parser,
@@ -150,7 +150,7 @@ public class AddCommandParserTest {
 
         // missing phone prefix -> default "000"
         Student missingPhone = asStudent(
-                new Person.PersonBuilder()
+                new Student.StudentBuilder()
                         .name(VALID_NAME_BOB)
                         .phone("000")
                         .email(VALID_EMAIL_BOB)
@@ -162,7 +162,7 @@ public class AddCommandParserTest {
                 new AddCommand(missingPhone));
 
         // missing email prefix -> default "default@email"
-        Student missingEmail = asStudent(new Person.PersonBuilder()
+        Student missingEmail = asStudent(new Student.StudentBuilder()
                 .name(VALID_NAME_BOB)
                 .phone(VALID_PHONE_BOB)
                 .email("default@email")
@@ -174,7 +174,7 @@ public class AddCommandParserTest {
                 new AddCommand(missingEmail));
 
         // missing address prefix -> default "Default Address"
-        Student missingAddress = asStudent(new Person.PersonBuilder()
+        Student missingAddress = asStudent(new Student.StudentBuilder()
                 .name(VALID_NAME_BOB)
                 .phone(VALID_PHONE_BOB)
                 .email(VALID_EMAIL_BOB)
@@ -186,7 +186,7 @@ public class AddCommandParserTest {
                 new AddCommand(missingAddress));
 
         // all prefixes missing (only name provided -> defaults for others)
-        Student onlyName = asStudent(new Person.PersonBuilder()
+        Student onlyName = asStudent(new Student.StudentBuilder()
                 .name(VALID_NAME_BOB)
                 .phone("000")
                 .email("default@email")

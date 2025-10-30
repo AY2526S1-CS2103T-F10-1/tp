@@ -56,24 +56,24 @@ public class NameContainsTagPredicateTest {
         NameContainsTagPredicate predicate = new NameContainsTagPredicate(Collections.singletonList(tag));
 
         // Person has only one tag
-        Person personWithOneTag = new Person.PersonBuilder()
+        Person personWithOneTag = new Student.StudentBuilder()
                 .name("new")
                 .tags(tag.tagName)
                 .build();
         assertTrue(predicate.test(personWithOneTag));
 
         // Person has multiple tags
-        Person personWithTwoTags = new Person.PersonBuilder()
+        Person personWithTwoTags = new Student.StudentBuilder()
                 .name("new")
                 .tags(tag.tagName, VALID_TAG_HUSBAND)
                 .build();
         assertTrue(predicate.test(personWithTwoTags));
-        Person otherPersonWithTwoTags = new Person.PersonBuilder()
+        Person otherPersonWithTwoTags = new Student.StudentBuilder()
                 .name("new")
                 .tags(VALID_TAG_HUSBAND, tag.tagName)
                 .build();
         assertTrue(predicate.test(otherPersonWithTwoTags));
-        Person personWithThreeTags = new Person.PersonBuilder()
+        Person personWithThreeTags = new Student.StudentBuilder()
                 .name("new")
                 .tags(VALID_TAG_HUSBAND, tag.tagName, VALID_TAG_ENGLISH)
                 .build();
@@ -84,7 +84,7 @@ public class NameContainsTagPredicateTest {
         NameContainsTagPredicate predicateWithUpperCaseTag = new NameContainsTagPredicate(
                 Collections.singletonList(tagUppercase));
         assertTrue(predicateWithUpperCaseTag.test(personWithOneTag));
-        Person personWithLowercaseTag = new Person.PersonBuilder()
+        Person personWithLowercaseTag = new Student.StudentBuilder()
                 .name("new")
                 .tags(VALID_TAG_FRIEND.toLowerCase())
                 .build();
@@ -93,7 +93,7 @@ public class NameContainsTagPredicateTest {
         Tag tagLowercase = new Tag(VALID_TAG_FRIEND.toLowerCase());
         NameContainsTagPredicate predicateWithLowerCaseTag = new NameContainsTagPredicate(
                 Collections.singletonList(tagLowercase));
-        Person personWithUppercaseTag = new Person.PersonBuilder()
+        Person personWithUppercaseTag = new Student.StudentBuilder()
                 .name("new")
                 .tags(VALID_TAG_FRIEND.toLowerCase())
                 .build();
@@ -106,7 +106,7 @@ public class NameContainsTagPredicateTest {
         NameContainsTagPredicate predicate = new NameContainsTagPredicate(Collections.singletonList(tag));
 
         // Zero tags
-        assertFalse(predicate.test(new Person.PersonBuilder()
+        assertFalse(predicate.test(new Student.StudentBuilder()
                 .name("name")
                 .tags()
                 .build())
@@ -118,10 +118,10 @@ public class NameContainsTagPredicateTest {
         // updated to have a different default set of tags.
 
         // Non-matching tag
-        assertFalse(predicate.test(new Person.PersonBuilder().name("name").tags(VALID_TAG_HUSBAND).build()));
+        assertFalse(predicate.test(new Student.StudentBuilder().name("name").tags(VALID_TAG_HUSBAND).build()));
 
         // Tag matches name, email, and address, but does not match tags
-        assertFalse(predicate.test(new Person.PersonBuilder()
+        assertFalse(predicate.test(new Student.StudentBuilder()
                 .name(VALID_TAG_FRIEND)
                 .email(VALID_TAG_FRIEND + "@email.com")
                 .address(VALID_TAG_FRIEND + "Street")

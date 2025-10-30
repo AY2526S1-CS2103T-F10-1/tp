@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -10,18 +11,18 @@ public class EditPersonDescriptorBuilder {
     private Person.PersonBuilder descriptor;
 
     public EditPersonDescriptorBuilder() {
-        descriptor = new Person.PersonBuilder();
+        descriptor = new Student.StudentBuilder();
     }
 
     public EditPersonDescriptorBuilder(Person.PersonBuilder descriptor) {
-        this.descriptor = new Person.PersonBuilder(descriptor);
+        this.descriptor = new Student.StudentBuilder(descriptor);
     }
 
     /**
      * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
      */
     public EditPersonDescriptorBuilder(Person person) {
-        descriptor = new Person.PersonBuilder(person);
+        descriptor = new Student.StudentBuilder(person);
     }
 
     /**

@@ -44,6 +44,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
 public class EditCommandParserTest {
@@ -110,7 +111,7 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
-        Person.PersonBuilder descriptor = new Person.PersonBuilder()
+        Person.PersonBuilder descriptor = new Student.StudentBuilder()
                 .name(VALID_NAME_AMY)
                 .phone(VALID_PHONE_BOB)
                 .email(VALID_EMAIL_AMY)
@@ -126,7 +127,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
-        Person.PersonBuilder descriptor = new Person.PersonBuilder()
+        Person.PersonBuilder descriptor = new Student.StudentBuilder()
                 .phone(VALID_PHONE_BOB)
                 .email(VALID_EMAIL_AMY);
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -139,31 +140,31 @@ public class EditCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        Person.PersonBuilder descriptor = new Person.PersonBuilder().name(VALID_NAME_AMY);
+        Person.PersonBuilder descriptor = new Student.StudentBuilder().name(VALID_NAME_AMY);
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
-        descriptor = new Person.PersonBuilder().phone(VALID_PHONE_AMY);
+        descriptor = new Student.StudentBuilder().phone(VALID_PHONE_AMY);
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
         userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
-        descriptor = new Person.PersonBuilder().email(VALID_EMAIL_AMY);
+        descriptor = new Student.StudentBuilder().email(VALID_EMAIL_AMY);
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
         userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY;
-        descriptor = new Person.PersonBuilder().address(VALID_ADDRESS_AMY);
+        descriptor = new Student.StudentBuilder().address(VALID_ADDRESS_AMY);
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new Person.PersonBuilder().tags(VALID_TAG_FRIEND);
+        descriptor = new Student.StudentBuilder().tags(VALID_TAG_FRIEND);
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -205,7 +206,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
-        Person.PersonBuilder descriptor = new Person.PersonBuilder().tags(new HashSet<>());
+        Person.PersonBuilder descriptor = new Student.StudentBuilder().tags(new HashSet<>());
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

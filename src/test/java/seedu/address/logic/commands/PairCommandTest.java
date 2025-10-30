@@ -24,6 +24,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
+import seedu.address.model.person.Volunteer;
 
 
 public class PairCommandTest {
@@ -50,9 +52,9 @@ public class PairCommandTest {
             Index studentIndex = Index.fromZeroBased(studentIndexInt.getAsInt());
             PairCommand pairCommand = new PairCommand(volunteerIndex, Collections.singletonList(studentIndex));
 
-            Person tutor = (new Person.PersonBuilder(model.getFilteredPersonList()
+            Person tutor = (new Volunteer.VolunteerBuilder(model.getFilteredPersonList()
                     .get(volunteerIndex.getZeroBased()))).build();
-            Person tutee = (new Person.PersonBuilder(model.getFilteredPersonList()
+            Person tutee = (new Student.StudentBuilder(model.getFilteredPersonList()
                     .get(studentIndex.getZeroBased()))).build();
             assert !model.isPaired(tutor, tutee);
             if (!model.isPaired(tutee, tutor)) {
