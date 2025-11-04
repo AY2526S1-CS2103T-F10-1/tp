@@ -551,10 +551,6 @@ The following planned enhancements are proposed to address known feature flaws i
    **Expected Result**: Default values will be clearly flagged or displayed differently from actual user data.<br>
    **Example**:<br>
    `Phone: 000` will be visually marked as a default value, distinguishing it from real phone numbers.
-9.  **Redesign Help Command Popup**<br>
-            **Issue**: The current Help command popup is poorly formatted and lacks consistency, making it difficult for users to read and understand the available commands.
-            **Enhancement**: The layout and styling of the Help popup will be improved for better clarity and user experience. This includes proper alignment, spacing, and clear visual separation between command names, formats, and examples.  
-            **Expected Result**: The Help popup will display all commands in a clean, structured, and visually consistent manner, improving readability and overall usability.
 
 ### Target User
 Volunteer agency coordinators running a social service organisation managing volunteers who provide free tuition to underprivileged teenagers. Target users are very efficient in using the CLI and hate using the mouse.
